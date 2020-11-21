@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebRTC</title>
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .centered {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .video-position {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #video-chat-container {
+            width: 100%;
+            background-color: black;
+        }
+
+        #local-video {
+            position: absolute;
+            height: 30%;
+            width: 30%;
+            bottom: 0px;
+            left: 0px;
+        }
+
+        #remote-video {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="room-selection-container" class="centered">
+        <h1>WebRTC video conference</h1>
+        <p>Meeting Id</p>
+        <p id="roomid"></p>
+        <p>Meeting Password</p>
+        <p id="roomidpassword"></p>
+
+        <p>Meeting URL</p>
+        <p id="meetingurl"></p>
+
+        <button id="joinmeeting-button">Start Meeting</button>
+
+    </div>
+    <script type="text/javascript">
+
+        var meetingid = document.getElementById('roomid');
+        var meetingpassword = document.getElementById('roomidpassword');
+        var linkgenerated = document.getElementById('meetingurl');
+
+        var newmeetingid = Math.floor(1000000000 + Math.random() * 9000000000);
+        var newmeetingpassword = Math.random().toString(36).substring(2, 7);
+
+        console.log('entered in script mode');
+
+
+
+        
+
+
+        // Creating a XHR object 
+        let xhr = new XMLHttpRequest();
+        let url = "http://176.36.92.127:5000/addUser";
+
+        // open a connection 
+        xhr.open("POST", url, true);
+
+      
+        // Create a state change callback 
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                alert(this.responseText);
+                // Print received data from server 
+                //result.innerHTML = this.responseText;
+
+            }
+        };
+
+        // Converting JSON data to string 
+        var data = JSON.stringify({ "meeting_id": newmeetingid, "password": newmeetingpassword });
+
+        // Sending data with the request 
+        xhr.send(data); 
+     </script>
+
+    <div id="video-chat-container" class="video-position" style="display: none">
+        <video id="local-video" autoplay="autoplay" muted="muted"></video>
+        <video id="remote-video" autoplay="autoplay"></video>
+    </div>
+
+   <!-- <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="client.js"></script>-->
+
+
+</body>
+</html>

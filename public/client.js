@@ -1,7 +1,7 @@
 // DOM elements.
 const roomSelectionContainer = document.getElementById('room-selection-container')
 const roomInput = document.getElementById('room-input')
-const connectButton = document.getElementById('connect-button')
+const connectButton = document.getElementById('joinmeeting-button')
 
 const videoChatContainer = document.getElementById('video-chat-container')
 const localVideoComponent = document.getElementById('local-video')
@@ -32,7 +32,7 @@ const iceServers = {
 
 // BUTTON LISTENER ============================================================
 connectButton.addEventListener('click', () => {
-  joinRoom(roomInput.value)
+    joinRoom(roomInput.value)
 })
 
 // SOCKET EVENT CALLBACKS =====================================================
