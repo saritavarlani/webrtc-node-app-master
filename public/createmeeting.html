@@ -60,50 +60,21 @@
         <button id="startmeeting-button">Start Meeting</button>
 
     </div>
-    <script type="text/javascript">
-
-        var meetingid = document.getElementById('roomid');
-        var meetingpassword = document.getElementById('roomidpassword');
-        //var linkgenerated = document.getElementById('meetingurl');
-
-        var newmeetingid = Math.floor(1000000000 + Math.random() * 9000000000);
-        var newmeetingpassword = Math.random().toString(36).substring(2, 7);
-
-        console.log('entered in script mode');
-        console.log(newmeetingid);
-        console.log(newmeetingpassword);
-
-        // Creating a XHR object
-        let xhr = new XMLHttpRequest();
-        let url = "http://176.36.92.127:5000/addUser";
-
-
-        // open a connection
-        xhr.open("POST", url, true);
-        
-
-
-        // Create a state change callback
-        xhr.onreadystatechange = function () {
-            if (xhr.status === 200) {
-
-                // Print received data from server
-                meetingid.innerHTML = newmeetingid;
-                meetingpassword.innerHTML = newmeetingpassword;
+    <script>
+        var formdata = serialize({ "meeting_id": "7015880777", "password": "6n34e" });
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formdata),
+            dataType: 'json',
+            url: 'http://176.36.92.127:5000/addUser',
+            success: function (e) {
+                console.log(e);
+            },
+            error: function (error) {
+                console.log(error);
             }
-            else {
-                alert('error');
-            }
-        };
-
-        // Converting JSON data to string
-        var data = JSON.stringify({ "meeting_id": newmeetingid, "password": newmeetingpassword });
-
-        //var asObject = JSON.parse(data);
-        //console.log(`asObject is of type ${typeof asObject}`);
-
-        // Sending data with the request
-        xhr.send(data);
+        });
     </script>
 
     <div id="video-chat-container" class="video-position" style="display: none">
