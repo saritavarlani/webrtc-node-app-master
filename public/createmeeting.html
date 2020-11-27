@@ -99,11 +99,11 @@
         // Converting JSON data to string
         var data = JSON.stringify({ "meeting_id": newmeetingid, "password": newmeetingpassword });
 
-        var asObject = JSON.parse(data);
-        
+        //var asObject = JSON.parse(data);
+        //console.log(`asObject is of type ${typeof asObject}`);
 
         // Sending data with the request
-        xhr.send(asObject);
+        xhr.send(data);
     </script>
 
     <div id="video-chat-container" class="video-position" style="display: none">
