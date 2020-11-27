@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 
@@ -49,22 +49,49 @@
 <body>
     <div id="room-selection-container" class="centered">
         <h1>WebRTC video conference</h1>
-        <label for="meetingid"><b>Meeting ID</b></label>
-        <input type="text" placeholder="Enter Meeting Id" name="id" required>
+        <label for="roomid"><b>Meeting ID</b></label>
+        <input type="text" placeholder="Enter Meeting Id" id="meetingid" required>
 
         <label for="meetingpassword"><b>Meeting Password</b></label>
-        <input type="password" placeholder="Enter Meeting Password" name="psw" required>
+        <input type="password" placeholder="Enter Meeting Password" id="password" required>
 
-        <p>OR</p>
-
-        <label for="meetingurl"><b>Meeting URL</b></label>
-        <input type="url" placeholder="Enter Meeting URL" name="url" required>
-
-        <button  id="joinmeeting-button">Join Meeting</button>
+        <!--<p>OR</p>-->
+        <!--<label for="meetingurl"><b>Meeting URL</b></label>
+        <input type="url" placeholder="Enter Meeting URL" name="url" required>-->
+        <button id="joinmeeting-button">Join Meeting</button>
     </div>
 
+    <script type="text/javascript">
+        document.getElementById("joinmeeting-button").onclick = function () {
+            let xhr = new XMLHttpRequest();
+            let url = "http://176.36.92.127:5000/checkUser";
+
+
+            // open a connection
+            xhr.open("POST", url, true);
+
+
+
+            // Create a state change callback
+            xhr.onreadystatechange = function () {
+                if (xhr.status === 200) {
+                    joinRoom(roomInput.value)
+                }
+                else {
+                    alert('error');
+                }
+            };
+
+            // Converting JSON data to string
+            var data = JSON.stringify({ "meeting_id": "7015880777", "password": "6n34e" });
+
+            // Sending data with the request
+            xhr.send(data);
+        };
+    </script>
+
     <script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="client.js"></script>
+    <script type="text/javascript" src="joinmeeting.js"></script>
 </body>
 
 

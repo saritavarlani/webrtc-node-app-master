@@ -1,6 +1,6 @@
 // DOM elements.
 const roomSelectionContainer = document.getElementById('room-selection-container')
-const roomInput = document.getElementById('room-input')
+const roomInput = document.getElementById('roomid')
 const connectButton = document.getElementById('joinmeeting-button')
 
 const videoChatContainer = document.getElementById('video-chat-container')
@@ -32,6 +32,7 @@ const iceServers = {
 
 // BUTTON LISTENER ============================================================
 connectButton.addEventListener('click', () => {
+    console.log('clicked');
     joinRoom(roomInput.value)
 })
 
