@@ -61,11 +61,10 @@
 
     </div>
     <script>
-        var formdata = serialize({ "meeting_id": "7015880777", "password": "6n34e" });
         $.ajax({
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify(formdata),
+            data: JSON.stringify({ "meeting_id": "7015880777", "password": "6n34e" }),
             dataType: 'json',
             url: 'http://176.36.92.127:5000/addUser',
             success: function (e) {
